@@ -1,0 +1,5 @@
+#ignoring some files
+build
+.gradle
+.idea
+*.iml
