@@ -4,6 +4,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Set;
 
+/**
+ * https://leetcode.com/problems/valid-parentheses/
+ */
 public class WellFormattedParentheses {
 
     private static Set<Character> OPEN = Set.of('(', '[', '{');
