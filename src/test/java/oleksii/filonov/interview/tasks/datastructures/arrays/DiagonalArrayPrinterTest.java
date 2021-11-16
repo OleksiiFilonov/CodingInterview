@@ -24,6 +24,7 @@ class DiagonalArrayPrinterTest {
             {26, 34},
             {15}
     };
+
     @Test
     void printIterativelyTest() {
         assertArrayEquals(testOutput1, printIteratively(testInput1));

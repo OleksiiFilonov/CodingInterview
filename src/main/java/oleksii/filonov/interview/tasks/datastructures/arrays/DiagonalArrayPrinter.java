@@ -69,27 +69,28 @@ public class DiagonalArrayPrinter {
     }
 
     private static int[] printDiagonal(int[][] array, int row, int col) {
-        List<Integer> result = new ArrayList<>();
+        int[] result = new int[Math.min(array.length - row, col + 1)];
+        int current = 0;
         while (row < array.length && col >= 0) {
-            result.add(array[row][col]);
+            result[current++] = array[row][col];
             row++;
             col--;
         }
-        return result.stream().mapToInt(Integer::intValue).toArray();
+        return result;
     }
 
-    public static int [][] printBFS(int[][] array) {
+    public static int[][] printBFS(int[][] array) {
         int colLen = array[0].length;
         int rowLen = array.length;
         int[][] result = new int[colLen + rowLen - 1][];
-        Queue<int []> bfs = new LinkedList<>();
-        bfs.add(new int[] {0, 0});
+        Queue<int[]> bfs = new LinkedList<>();
+        bfs.add(new int[]{0, 0});
         int outputRowIndex = 0;
         while (!bfs.isEmpty()) {
             int size = bfs.size();
             result[outputRowIndex] = new int[size];
-            for (int i = 0; i < size-1; i++) {
-                int [] node = bfs.poll();
+            for (int i = 0; i < size - 1; i++) {
+                int[] node = bfs.poll();
                 result[outputRowIndex][i] = array[node[0]][node[1]];
                 //right node
                 int newCol = node[1] + 1;
@@ -97,16 +98,16 @@ public class DiagonalArrayPrinter {
                     bfs.add(new int[]{node[0], newCol});
             }
             //pull last node for the row and add right and bottom node if possible
-            int [] node = bfs.poll();
-            result[outputRowIndex][size-1] = array[node[0]][node[1]];
+            int[] node = bfs.poll();
+            result[outputRowIndex][size - 1] = array[node[0]][node[1]];
             //right node
             int newCol = node[1] + 1;
             if (newCol < colLen)
                 bfs.add(new int[]{node[0], newCol});
             //bottom node
             int newRow = node[0] + 1;
-            if(newRow < rowLen)
-                bfs.add(new int[] {newRow, node[1]});
+            if (newRow < rowLen)
+                bfs.add(new int[]{newRow, node[1]});
             outputRowIndex++;
         }
         return result;
