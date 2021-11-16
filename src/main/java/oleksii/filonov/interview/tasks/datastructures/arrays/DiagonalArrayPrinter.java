@@ -1,8 +1,6 @@
 package oleksii.filonov.interview.tasks.datastructures.arrays;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /*
@@ -89,27 +87,31 @@ public class DiagonalArrayPrinter {
         while (!bfs.isEmpty()) {
             int size = bfs.size();
             result[outputRowIndex] = new int[size];
+            //pull nodes and add right neighbors to the queue
             for (int i = 0; i < size - 1; i++) {
                 int[] node = bfs.poll();
                 result[outputRowIndex][i] = array[node[0]][node[1]];
-                //right node
-                int newCol = node[1] + 1;
-                if (newCol < colLen)
-                    bfs.add(new int[]{node[0], newCol});
+                addRightNeighbor(colLen, bfs, node);
             }
             //pull last node for the row and add right and bottom node if possible
             int[] node = bfs.poll();
             result[outputRowIndex][size - 1] = array[node[0]][node[1]];
-            //right node
-            int newCol = node[1] + 1;
-            if (newCol < colLen)
-                bfs.add(new int[]{node[0], newCol});
-            //bottom node
-            int newRow = node[0] + 1;
-            if (newRow < rowLen)
-                bfs.add(new int[]{newRow, node[1]});
+            addRightNeighbor(colLen, bfs, node);
+            addBottomNeighbor(rowLen, bfs, node);
             outputRowIndex++;
         }
         return result;
+    }
+
+    private static void addBottomNeighbor(int rowLen, Queue<int[]> bfs, int[] node) {
+        int newRow = node[0] + 1;
+        if (newRow < rowLen)
+            bfs.add(new int[]{newRow, node[1]});
+    }
+
+    private static void addRightNeighbor(int colLen, Queue<int[]> bfs, int[] node) {
+        int newCol = node[1] + 1;
+        if (newCol < colLen)
+            bfs.add(new int[]{node[0], newCol});
     }
 }
