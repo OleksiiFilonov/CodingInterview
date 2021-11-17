@@ -3,6 +3,7 @@ package oleksii.filonov.interview.tasks.datastructures.arrays;
 import org.junit.jupiter.api.Test;
 
 import static oleksii.filonov.interview.tasks.datastructures.arrays.DiagonalArrayPrinter.printBFS;
+import static oleksii.filonov.interview.tasks.datastructures.arrays.DiagonalArrayPrinter.printHashMap;
 import static oleksii.filonov.interview.tasks.datastructures.arrays.DiagonalArrayPrinter.printIteratively;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -33,5 +34,10 @@ class DiagonalArrayPrinterTest {
     @Test
     void printBFSTest() {
         assertArrayEquals(testOutput1, printBFS(testInput1));
+    }
+
+    @Test
+    void printHashMapTest() {
+        assertArrayEquals(testOutput1, printHashMap(testInput1));
     }
 }

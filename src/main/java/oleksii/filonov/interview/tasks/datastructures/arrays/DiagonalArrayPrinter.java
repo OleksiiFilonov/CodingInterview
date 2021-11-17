@@ -1,7 +1,6 @@
 package oleksii.filonov.interview.tasks.datastructures.arrays;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /*
 # == == == == == == == == == == == == == == == == == == == == == =
@@ -113,5 +112,22 @@ public class DiagonalArrayPrinter {
         int newCol = node[1] + 1;
         if (newCol < colLen)
             bfs.add(new int[]{node[0], newCol});
+    }
+
+    public static int[][] printHashMap(int[][] array) {
+        int rowLen = array.length;
+        int colLen = array[0].length;
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < rowLen; i++) {
+            for (int j = 0; j < colLen; j++) {
+                List<Integer> rows = map.getOrDefault(i + j, new ArrayList<>());
+                rows.add(array[i][j]);
+                map.put(i + j, rows);
+            }
+        }
+        int[][] result = new int[colLen + rowLen - 1][];
+        for (int i = 0; i < result.length; i++)
+            result[i] = map.get(i).stream().mapToInt(Integer::intValue).toArray();
+        return result;
     }
 }
