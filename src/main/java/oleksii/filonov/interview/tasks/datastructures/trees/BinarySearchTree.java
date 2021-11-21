@@ -119,22 +119,22 @@ public class BinarySearchTree {
         preOrder(root.right, result);
     }
 
-    public boolean hasPathSum(int sum) {
+    public boolean hasRootToLeafPathSum(int sum) {
         if(root == null)
             return false;
         else
-            return hasPathSum(root, sum);
+            return hasRootToLeafPathSum(root, sum);
     }
 
-    private boolean hasPathSum(Node root, int remainder) {
+    private boolean hasRootToLeafPathSum(Node root, int remainder) {
         //base cases
         if(root == null)
             return false;
         if(root.left == null && root.right == null)
             return root.value == remainder;
         //recurring case
-        return hasPathSum(root.left, remainder-root.value)
-                || hasPathSum(root.right, remainder-root.value);
+        return hasRootToLeafPathSum(root.left, remainder-root.value)
+                || hasRootToLeafPathSum(root.right, remainder-root.value);
     }
 
     public static class Node {
