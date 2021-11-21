@@ -32,6 +32,26 @@ public class BinaryTree {
         return root;
     }
 
+    public int maxDepth() {
+        return maxDepth(root);
+    }
+
+    private int maxDepth(Node root) {
+        if(root == null)
+            return 0;
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node root) {
+        if(root == null)
+            return 0;
+        return 1 + size(root.left) + size(root.right);
+    }
+
     public static class Node {
         private int value;
         private Node left;
