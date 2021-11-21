@@ -1,6 +1,5 @@
 package oleksii.filonov.interview.tasks.datastructures.trees;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,14 +11,28 @@ public class BinarySearchTreeTraversalTest {
 
     @Test
     public void inOrderTraversal() {
+        BinarySearchTree binarySearchTree = createBST();
+        List<Integer> actualBSTOrder = binarySearchTree.inOrder();
+        assertIterableEquals(List.of(1, 2, 3, 4, 5), actualBSTOrder,
+                () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
+    }
+
+    @Test
+    public void postOrderTraversal() {
+        BinarySearchTree binarySearchTree = createBST();
+        List<Integer> actualBSTOrder = binarySearchTree.postOrder();
+        assertIterableEquals(List.of(1, 3, 2, 5, 4), actualBSTOrder,
+                () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
+    }
+
+    private BinarySearchTree createBST() {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
         binarySearchTree.insert(4);
         binarySearchTree.insert(2);
         binarySearchTree.insert(1);
         binarySearchTree.insert(3);
         binarySearchTree.insert(5);
-        List<Integer> actualBSTOrder = binarySearchTree.inOrder();
-        assertIterableEquals(List.of(1, 2, 3, 4, 5), actualBSTOrder,
-                () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
+        return binarySearchTree;
     }
+
 }
