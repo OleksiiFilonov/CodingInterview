@@ -1,9 +1,12 @@
 package oleksii.filonov.interview.tasks.datastructures.trees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * For tasks from http://cslibrary.stanford.edu/110/BinaryTrees.html
  */
-public class BinaryTree {
+public class BinarySearchTree {
 
     private Node root;
 
@@ -63,6 +66,23 @@ public class BinaryTree {
             return root.value;
         else
             return minValue(root.left);
+    }
+
+    public List<Integer> inOrder() {
+        List<Integer> result = new ArrayList<>();
+        inOrder(root, result);
+        return result;
+    }
+
+    private void inOrder(Node root, List<Integer> result) {
+        if(root == null)
+            return;
+        //left
+        inOrder(root.left, result);
+        //root
+        result.add(root.value);
+        //right
+        inOrder(root.right, result);
     }
 
     public static class Node {
