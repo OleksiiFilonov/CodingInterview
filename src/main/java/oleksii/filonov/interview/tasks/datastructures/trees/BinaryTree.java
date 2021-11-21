@@ -52,6 +52,19 @@ public class BinaryTree {
         return 1 + size(root.left) + size(root.right);
     }
 
+    public int minValue() {
+        if(root == null)
+            throw new IllegalStateException("Can't return minimum value of an empty tree");
+        return minValue(root);
+    }
+
+    private int minValue(Node root) {
+        if(root.left == null)
+            return root.value;
+        else
+            return minValue(root.left);
+    }
+
     public static class Node {
         private int value;
         private Node left;

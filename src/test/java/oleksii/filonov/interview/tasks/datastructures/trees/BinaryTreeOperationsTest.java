@@ -3,6 +3,7 @@ package oleksii.filonov.interview.tasks.datastructures.trees;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BinaryTreeOperationsTest {
 
@@ -30,5 +31,19 @@ public class BinaryTreeOperationsTest {
         assertEquals(2, binaryTree.maxDepth());
         binaryTree.insert(4);
         assertEquals(3, binaryTree.maxDepth());
+    }
+
+    @Test
+    public void checkMinValue() {
+        BinaryTree binaryTree = new BinaryTree();
+        assertThrows(IllegalStateException.class, binaryTree::minValue);
+        binaryTree.insert(2);
+        assertEquals(2, binaryTree.minValue());
+        binaryTree.insert(1);
+        assertEquals(1, binaryTree.minValue());
+        binaryTree.insert(3);
+        assertEquals(1, binaryTree.minValue());
+        binaryTree.insert(0);
+        assertEquals(0, binaryTree.minValue());
     }
 }
