@@ -25,6 +25,14 @@ public class BinarySearchTreeTraversalTest {
                 () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
     }
 
+    @Test
+    public void preOrderTraversal() {
+        BinarySearchTree binarySearchTree = createBST();
+        List<Integer> actualBSTOrder = binarySearchTree.preOrder();
+        assertIterableEquals(List.of(4, 2, 1, 3, 5), actualBSTOrder,
+                () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
+    }
+
     private BinarySearchTree createBST() {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
         binarySearchTree.insert(4);

@@ -102,6 +102,23 @@ public class BinarySearchTree {
         result.add(root.value);
     }
 
+    public List<Integer> preOrder() {
+        List<Integer> result = new ArrayList<>();
+        preOrder(root, result);
+        return result;
+    }
+
+    private void preOrder(Node root, List<Integer> result) {
+        if(root == null)
+            return;
+        //root
+        result.add(root.value);
+        //left
+        preOrder(root.left, result);
+        //right
+        preOrder(root.right, result);
+    }
+
     public static class Node {
         private int value;
         private Node left;
