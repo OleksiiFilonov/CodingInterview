@@ -2,6 +2,7 @@ package oleksii.filonov.interview.tasks.datastructures.trees;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ public class BinarySearchTreeTraversalTest {
         BinarySearchTree binarySearchTree = createBST();
         List<Integer> actualBSTOrder = binarySearchTree.inOrder();
         assertIterableEquals(List.of(1, 2, 3, 4, 5), actualBSTOrder,
-                () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
+                () -> printCollection(actualBSTOrder));
     }
 
     @Test
@@ -22,7 +23,7 @@ public class BinarySearchTreeTraversalTest {
         BinarySearchTree binarySearchTree = createBST();
         List<Integer> actualBSTOrder = binarySearchTree.postOrder();
         assertIterableEquals(List.of(1, 3, 2, 5, 4), actualBSTOrder,
-                () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
+                () -> printCollection(actualBSTOrder));
     }
 
     @Test
@@ -30,7 +31,11 @@ public class BinarySearchTreeTraversalTest {
         BinarySearchTree binarySearchTree = createBST();
         List<Integer> actualBSTOrder = binarySearchTree.preOrder();
         assertIterableEquals(List.of(4, 2, 1, 3, 5), actualBSTOrder,
-                () -> "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(",")));
+                () -> printCollection(actualBSTOrder));
+    }
+
+    private String printCollection(Collection<Integer> actualBSTOrder) {
+        return "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(","));
     }
 
     private BinarySearchTree createBST() {
