@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BinarySearchTreeTraversalTest {
 
@@ -38,6 +38,13 @@ public class BinarySearchTreeTraversalTest {
         return "actual: " + actualBSTOrder.stream().map(Object::toString).collect(Collectors.joining(","));
     }
 
+    /**
+     * 4
+     * 2        5
+     * 1    3
+     *
+     * @return binary  tree
+     */
     private BinarySearchTree createBST() {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
         binarySearchTree.insert(4);
@@ -48,4 +55,16 @@ public class BinarySearchTreeTraversalTest {
         return binarySearchTree;
     }
 
+    @Test
+    public void printPath() {
+        BinarySearchTree bst = createBST();
+        bst.insert(6);
+        List<List<Integer>> paths = bst.printPath();
+        assertTrue(paths.stream().anyMatch(path -> path.equals(List.of(4, 2, 1))));
+        assertTrue(paths.stream().anyMatch(path -> path.equals(List.of(4, 2, 3))));
+        assertFalse(paths.stream().anyMatch(path -> path.equals(List.of(4, 5))));
+        assertTrue(paths.stream().anyMatch(path -> path.equals(List.of(4, 5, 6))));
+        assertFalse(paths.stream().anyMatch(path -> path.equals(List.of(4, 2))));
+        assertFalse(paths.stream().anyMatch(path -> path.equals(List.of(4, 3))));
+    }
 }

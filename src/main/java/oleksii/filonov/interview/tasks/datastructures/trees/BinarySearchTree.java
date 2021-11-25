@@ -1,6 +1,7 @@
 package oleksii.filonov.interview.tasks.datastructures.trees;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -135,6 +136,31 @@ public class BinarySearchTree {
         //recurring case
         return hasRootToLeafPathSum(root.left, remainder-root.value)
                 || hasRootToLeafPathSum(root.right, remainder-root.value);
+    }
+
+
+    /**
+     * Print all paths from root to leaf
+     * @return All the paths from root to leaf in a tree
+     */
+    public List<List<Integer>> printPath() {
+        List<List<Integer>> paths = new ArrayList<>();
+        printPath(this.root, new LinkedList<>(), paths);
+        return paths;
+    }
+
+    private void printPath(Node root, LinkedList<Integer> path, List<List<Integer>> paths) {
+        if(root == null)
+            return;
+        if(root.left == null && root.right == null) {
+            path.add(root.value);
+            paths.add(new ArrayList<>(path));
+        } else {
+            path.add(root.value);
+            printPath(root.left, path, paths);
+            printPath(root.right, path, paths);
+        }
+        path.removeLast();
     }
 
     public static class Node {
