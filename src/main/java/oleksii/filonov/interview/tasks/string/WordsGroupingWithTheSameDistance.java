@@ -21,12 +21,12 @@ import java.util.stream.Collectors;
 
 public class WordsGroupingWithTheSameDistance {
 
-    public static Collection<List<String>> grouped(String[] words) {
+    public static Collection<List<String>> group(String[] words) {
         Map<String, List<String>> groups = new HashMap<>();
         for (String word : words) {
             List<Integer> distance = new ArrayList<>();
             for (int i = 1; i < word.length(); i++) {
-                distance.add(word.charAt(i) - word.charAt(i - 1));
+                distance.add((word.charAt(i) - word.charAt(i - 1) + 26) % 26);
             }
             String key = distance.stream().map(String::valueOf).collect(Collectors.joining(","));
             List<String> group = groups.getOrDefault(key, new ArrayList<>());
