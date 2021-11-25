@@ -6,7 +6,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BinarySearchTreeTraversalTest {
 
@@ -66,5 +68,15 @@ public class BinarySearchTreeTraversalTest {
         assertTrue(paths.stream().anyMatch(path -> path.equals(List.of(4, 5, 6))));
         assertFalse(paths.stream().anyMatch(path -> path.equals(List.of(4, 2))));
         assertFalse(paths.stream().anyMatch(path -> path.equals(List.of(4, 3))));
+    }
+
+    @Test
+    public void mirror() {
+        BinarySearchTree bst = createBST();
+        List<Integer> inOrderBefore = bst.inOrder();
+        assertIterableEquals(List.of(1, 2, 3, 4, 5), inOrderBefore, () -> printCollection(inOrderBefore));
+        bst.mirror();
+        List<Integer> inOrderAfterMirror = bst.inOrder();
+        assertIterableEquals(List.of(5, 4, 3, 2, 1), inOrderAfterMirror, () -> printCollection(inOrderAfterMirror));
     }
 }

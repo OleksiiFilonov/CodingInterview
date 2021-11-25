@@ -163,6 +163,23 @@ public class BinarySearchTree {
         path.removeLast();
     }
 
+    /**
+     * Mirror the tree so left node is swapped with the right node
+     */
+    public void mirror() {
+        mirror(root);
+    }
+
+    private void mirror(Node root) {
+        if(root == null)
+            return;
+        Node temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        mirror(root.left);
+        mirror(root.right);
+    }
+
     public static class Node {
         private int value;
         private Node left;
