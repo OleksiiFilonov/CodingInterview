@@ -61,4 +61,12 @@ public class BinarySearchTreeOperationsTest {
         assertIterableEquals(List.of(5, 4, 3, 2, 1), inOrderAfterMirror, () -> printCollection(inOrderAfterMirror));
     }
 
+    @Test
+    public void doubleTree() {
+        BinarySearchTree bst = createBST();
+        bst.doubleTree();
+        List<Integer> inOrderBefore = bst.inOrder();
+        assertIterableEquals(List.of(1, 1, 2, 2, 3, 3, 4, 4, 5, 5), inOrderBefore, () -> printCollection(inOrderBefore));
+
+    }
 }
