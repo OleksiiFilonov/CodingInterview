@@ -180,6 +180,20 @@ public class BinarySearchTree {
         mirror(root.right);
     }
 
+    public void doubleTree() {
+        doubleTree(root);
+    }
+
+    private void doubleTree(Node root) {
+        if(root == null)
+            return;
+        doubleTree(root.left);
+        Node doubled = new Node(root.value);
+        doubled.left = root.left;
+        root.left = doubled;
+        doubleTree(root.right);
+    }
+
     public static class Node {
         private int value;
         private Node left;

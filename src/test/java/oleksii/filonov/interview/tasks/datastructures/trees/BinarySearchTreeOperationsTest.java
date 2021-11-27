@@ -2,8 +2,12 @@ package oleksii.filonov.interview.tasks.datastructures.trees;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.List;
+
+import static oleksii.filonov.interview.tasks.datastructures.trees.BSTTestHelper.createBST;
+import static oleksii.filonov.interview.tasks.datastructures.trees.BSTTestHelper.printCollection;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 public class BinarySearchTreeOperationsTest {
 
@@ -46,4 +50,15 @@ public class BinarySearchTreeOperationsTest {
         binarySearchTree.insert(0);
         assertEquals(0, binarySearchTree.minValue());
     }
+
+    @Test
+    public void mirror() {
+        BinarySearchTree bst = createBST();
+        List<Integer> inOrderBefore = bst.inOrder();
+        assertIterableEquals(List.of(1, 2, 3, 4, 5), inOrderBefore, () -> printCollection(inOrderBefore));
+        bst.mirror();
+        List<Integer> inOrderAfterMirror = bst.inOrder();
+        assertIterableEquals(List.of(5, 4, 3, 2, 1), inOrderAfterMirror, () -> printCollection(inOrderAfterMirror));
+    }
+
 }
