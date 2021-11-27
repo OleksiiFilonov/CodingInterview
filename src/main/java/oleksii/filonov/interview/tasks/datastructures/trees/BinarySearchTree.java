@@ -3,6 +3,7 @@ package oleksii.filonov.interview.tasks.datastructures.trees;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * For tasks from http://cslibrary.stanford.edu/110/BinaryTrees.html
@@ -21,12 +22,12 @@ public class BinarySearchTree {
     }
 
     private Node insert(Node root, int value) {
-        if(root == null)
+        if (root == null)
             return new Node(value);
 
-        if(root.value == value)
+        if (root.value == value)
             return root;
-        if(root.value < value) {
+        if (root.value < value) {
             //go right
             root.right = insert(root.right, value);
         } else {
@@ -41,7 +42,7 @@ public class BinarySearchTree {
     }
 
     private int maxDepth(Node root) {
-        if(root == null)
+        if (root == null)
             return 0;
         return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
@@ -51,19 +52,19 @@ public class BinarySearchTree {
     }
 
     private int size(Node root) {
-        if(root == null)
+        if (root == null)
             return 0;
         return 1 + size(root.left) + size(root.right);
     }
 
     public int minValue() {
-        if(root == null)
+        if (root == null)
             throw new IllegalStateException("Can't return minimum value of an empty tree");
         return minValue(root);
     }
 
     private int minValue(Node root) {
-        if(root.left == null)
+        if (root.left == null)
             return root.value;
         else
             return minValue(root.left);
@@ -76,7 +77,7 @@ public class BinarySearchTree {
     }
 
     private void inOrder(Node root, List<Integer> result) {
-        if(root == null)
+        if (root == null)
             return;
         //left
         inOrder(root.left, result);
@@ -93,7 +94,7 @@ public class BinarySearchTree {
     }
 
     private void postOrder(Node root, List<Integer> result) {
-        if(root == null)
+        if (root == null)
             return;
         //left
         postOrder(root.left, result);
@@ -110,7 +111,7 @@ public class BinarySearchTree {
     }
 
     private void preOrder(Node root, List<Integer> result) {
-        if(root == null)
+        if (root == null)
             return;
         //root
         result.add(root.value);
@@ -121,7 +122,7 @@ public class BinarySearchTree {
     }
 
     public boolean hasRootToLeafPathSum(int sum) {
-        if(root == null)
+        if (root == null)
             return false;
         else
             return hasRootToLeafPathSum(root, sum);
@@ -129,18 +130,19 @@ public class BinarySearchTree {
 
     private boolean hasRootToLeafPathSum(Node root, int remainder) {
         //base cases
-        if(root == null)
+        if (root == null)
             return false;
-        if(root.left == null && root.right == null)
+        if (root.left == null && root.right == null)
             return root.value == remainder;
         //recurring case
-        return hasRootToLeafPathSum(root.left, remainder-root.value)
-                || hasRootToLeafPathSum(root.right, remainder-root.value);
+        return hasRootToLeafPathSum(root.left, remainder - root.value)
+                || hasRootToLeafPathSum(root.right, remainder - root.value);
     }
 
 
     /**
      * Print all paths from root to leaf
+     *
      * @return All the paths from root to leaf in a tree
      */
     public List<List<Integer>> printPath() {
@@ -150,9 +152,9 @@ public class BinarySearchTree {
     }
 
     private void printPath(Node root, LinkedList<Integer> path, List<List<Integer>> paths) {
-        if(root == null)
+        if (root == null)
             return;
-        if(root.left == null && root.right == null) {
+        if (root.left == null && root.right == null) {
             path.add(root.value);
             paths.add(new ArrayList<>(path));
         } else {
@@ -171,7 +173,7 @@ public class BinarySearchTree {
     }
 
     private void mirror(Node root) {
-        if(root == null)
+        if (root == null)
             return;
         Node temp = root.left;
         root.left = root.right;
@@ -185,7 +187,7 @@ public class BinarySearchTree {
     }
 
     private void doubleTree(Node root) {
-        if(root == null)
+        if (root == null)
             return;
         doubleTree(root.left);
         Node doubled = new Node(root.value);
@@ -194,10 +196,31 @@ public class BinarySearchTree {
         doubleTree(root.right);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        BinarySearchTree that = (BinarySearchTree) other;
+        return root.equals(that.root);
+    }
+
     public static class Node {
         private int value;
         private Node left;
         private Node right;
+
+        public boolean equals(Object other) {
+            if (this == other) return true;
+            if (other == null || getClass() != other.getClass()) return false;
+            Node node = (Node) other;
+            return value == node.value && checkChild(left, node.left) && checkChild(right, node.right);
+        }
+
+        private boolean checkChild(Node thisRef, Node otherRef) {
+            if (thisRef == null)
+                return otherRef == null;
+            return thisRef.equals(otherRef);
+        }
 
         public Node(int value) {
             this.value = value;

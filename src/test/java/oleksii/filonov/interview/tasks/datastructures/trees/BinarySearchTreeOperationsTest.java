@@ -67,6 +67,14 @@ public class BinarySearchTreeOperationsTest {
         bst.doubleTree();
         List<Integer> inOrderBefore = bst.inOrder();
         assertIterableEquals(List.of(1, 1, 2, 2, 3, 3, 4, 4, 5, 5), inOrderBefore, () -> printCollection(inOrderBefore));
+    }
 
+    @Test
+    public void sameTree() {
+        BinarySearchTree bst1 = createBST();
+        BinarySearchTree bst2 = createBST();
+        assertEquals(bst1, bst2);
+        bst2.insert(99);
+        assertNotEquals(bst1, bst2);
     }
 }
