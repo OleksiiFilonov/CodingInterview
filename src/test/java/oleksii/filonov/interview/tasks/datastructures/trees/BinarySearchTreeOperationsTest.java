@@ -86,4 +86,9 @@ public class BinarySearchTreeOperationsTest {
         assertEquals(5, BinarySearchTree.countTrees(3));
         assertEquals(14, BinarySearchTree.countTrees(4));
     }
+
+    @Test
+    public void isBST() {
+        assertTrue(createBST().isBST());
+    }
 }

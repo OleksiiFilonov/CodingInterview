@@ -213,6 +213,17 @@ public class BinarySearchTree {
         return result;
     }
 
+    public boolean isBST() {
+        return isBST(Integer.MIN_VALUE, root, Integer.MAX_VALUE);
+    }
+
+    private boolean isBST(int min, Node root, int max) {
+        if(root == null)
+            return true;
+        return root.value > min && root.value <= max
+                && isBST(min, root.left, root.value)
+                && isBST(root.value, root.right, max);
+    }
 
     public static class Node {
         private int value;
