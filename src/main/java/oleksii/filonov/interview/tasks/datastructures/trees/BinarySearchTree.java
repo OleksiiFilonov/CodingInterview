@@ -3,7 +3,6 @@ package oleksii.filonov.interview.tasks.datastructures.trees;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * For tasks from http://cslibrary.stanford.edu/110/BinaryTrees.html
@@ -209,10 +208,15 @@ public class BinarySearchTree {
         private Node left;
         private Node right;
 
+        @Override
         public boolean equals(Object other) {
             if (this == other) return true;
             if (other == null || getClass() != other.getClass()) return false;
             Node node = (Node) other;
+            return value == node.value && checkChild(left, node.left) && checkChild(right, node.right);
+        }
+
+        public boolean equals(Node node) {
             return value == node.value && checkChild(left, node.left) && checkChild(right, node.right);
         }
 
