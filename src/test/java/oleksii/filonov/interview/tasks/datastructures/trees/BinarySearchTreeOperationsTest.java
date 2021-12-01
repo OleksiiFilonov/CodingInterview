@@ -77,4 +77,13 @@ public class BinarySearchTreeOperationsTest {
         bst2.insert(99);
         assertNotEquals(bst1, bst2);
     }
+
+    @Test
+    public void countTrees() {
+        assertEquals(1, BinarySearchTree.countTrees(0));
+        assertEquals(1, BinarySearchTree.countTrees(1));
+        assertEquals(2, BinarySearchTree.countTrees(2));
+        assertEquals(5, BinarySearchTree.countTrees(3));
+        assertEquals(14, BinarySearchTree.countTrees(4));
+    }
 }

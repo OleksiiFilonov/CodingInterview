@@ -203,6 +203,17 @@ public class BinarySearchTree {
         return root.equals(that.root);
     }
 
+    public static int countTrees(int n) {//4
+        if(n == 0 || n == 1)
+            return 1;
+        int result = 0;
+        for(int i = 1; i <= n; i++) {
+            result += countTrees(i-1) * countTrees(n-i);
+        }
+        return result;
+    }
+
+
     public static class Node {
         private int value;
         private Node left;
