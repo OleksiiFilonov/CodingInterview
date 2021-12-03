@@ -7,6 +7,8 @@ Input: s = "1+1"
 Output: 2
 Input: s = “5+3-2+1”
 Output: 7
+
+How code will change when multiplication, division, braces in place?
  */
 public class ExpressionEvaluator {
 
