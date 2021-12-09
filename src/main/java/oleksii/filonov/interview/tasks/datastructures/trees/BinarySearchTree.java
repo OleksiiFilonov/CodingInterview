@@ -226,9 +226,9 @@ public class BinarySearchTree {
     }
 
     public static class Node {
-        private int value;
-        private Node left;
-        private Node right;
+        int value;
+        Node left;
+        Node right;
 
         @Override
         public boolean equals(Object other) {
