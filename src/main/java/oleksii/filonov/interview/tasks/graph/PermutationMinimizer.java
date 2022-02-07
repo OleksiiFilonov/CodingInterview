@@ -38,7 +38,7 @@ public class PermutationMinimizer {
                 }
             }
         }
-        return minOperations;
+        throw new IllegalStateException("Input array " + Arrays.toString(input) + " must be possible to sort");
     }
 
     private static int[][] generatePermutations(int[] permutation) {
